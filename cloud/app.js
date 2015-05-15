@@ -14,8 +14,16 @@ app.post('/', function(req, res) {
   var phoneNumber = form.phoneNumber;
 
   if(phoneNumber) {
+    phoneNumber = phoneNumber.replace(/\D/g, '');
+    if(phoneNumber.length != 10) {
+      res.render("index.ejs", {warning: "You must enter a 10-digit US phone number including area code."});
+    }
     Parse.Cloud.run("sendCode", {phoneNumber: phoneNumber}).then(function(response){
-      res.render("verify.ejs", {phoneNumber: phoneNumber});
+      if(response){
+        res.render("verify.ejs", {phoneNumber: phoneNumber});
+      } else {
+        res.render("index.ejs", {warning: "Something went wrong. Please check your Twilio configuration."});
+      }
     }, function(error){
     res.render("index.ejs", {warning: "Something went wrong. Please try again."});
     });
@@ -34,6 +42,10 @@ app.post('/verify', function(req, res){
   var phoneNumber = form.phoneNumber;
 
   if(code) {
+    code = code.replace(/\D/g, '');
+    if(code.length != 4) {
+      res.render("verify.ejs", {warning: "You must enter a 4 digit code texted to your phone number."});
+    }
     Parse.Cloud.run("logIn", {codeEntry: code, phoneNumber: phoneNumber}).then(function(response){
       var sessionToken = response;
       Parse.User.become(sessionToken).then(function (user) {
