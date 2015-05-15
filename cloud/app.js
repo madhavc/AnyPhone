@@ -15,11 +15,10 @@ app.post('/', function(req, res) {
 
   if(phoneNumber) {
     Parse.Cloud.run("sendCode", {phoneNumber: phoneNumber}).then(function(response){
-      console.log("success!");
+      res.render("verify.ejs", {phoneNumber: phoneNumber});
     }, function(error){
-      console.log("fail");
+    res.render("index.ejs", {warning: "Something went wrong. Please try again."});
     });
-    res.render("verify.ejs", {phoneNumber: phoneNumber});
   } else { 
     res.render("index.ejs", {warning: "You forgot to enter your mobile number."})
   }
