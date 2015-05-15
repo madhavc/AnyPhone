@@ -16,6 +16,11 @@
 * Open the AnyPhone Xcode project, and put your Parse Application Id and Client Key in `AppDelegate.swift`.
 * Deploy your Cloud Code by running `parse deploy` from the root of your Cloud Code folder.
 
+##### Setting Up AnyPhone Web
+* Enable Hosting on your Parse App by going to the Settings > Hosting page. Add a subdomain name (ex. "anyphonetest123") that will allow you to access AnyPhone for Web.  
+* Edit 'dashboard.ejs' to include your Parse App Id and Parse Javascript Key
+* Visit the hosted pages using the subdomain you created. http://*.parseapp.com
+
 #### Optionally
 
 * Lock down the User class in the Data Browser.  Remove all permissions except Update from the Public role.  This is a good idea even though we're already setting a restrictive ACL on each User we create through this process.  You can remove the "Add Field" permission only after using the app, or after manually creating the additional columns.
