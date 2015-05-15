@@ -1,3 +1,4 @@
+require("cloud/app.js");
 
 var twilioAccountSid = 'Your-Twilio-Account-Sid';
 var twilioAuthToken = 'Your-Twilio-Auth-Token';
