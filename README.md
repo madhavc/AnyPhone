@@ -11,7 +11,7 @@
 #### Getting Started
 
 * Create a new Parse App, and [set up a Cloud Code folder](https://parse.com/docs/js/guide#cloud-code) for the project.  
-* Copy the `cloud/main.js` file from this repository into the `cloud/` folder in your Cloud Code folder.  
+* Copy the contents of the `cloud/` folder from this repository into the `cloud/` folder in your Cloud Code folder.  
 * Edit `main.js` to include your Twilio Account Sid, Auth Token, and phone number.  Generate some random string to use as the password token.  
 * Open the AnyPhone Xcode project, and put your Parse Application Id and Client Key in `AppDelegate.swift`.
 * Deploy your Cloud Code by running `parse deploy` from the root of your Cloud Code folder.
