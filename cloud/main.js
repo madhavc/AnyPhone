@@ -65,8 +65,10 @@ function sendCodeSms(phoneNumber, code) {
 	}, function(err, responseData) {
 		if (err) {
 			console.log(err);
+			promise.reject(err.message);
+		} else {
+			promise.resolve();
 		}
-		promise.resolve();
 	});
 	return promise;
 }

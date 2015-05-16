@@ -72,6 +72,8 @@ class LoginViewController: UIViewController {
           var description = error.description
           if count(description) == 0 {
             description = "There was a problem with the service.\nTry again later."
+          } else if let message = error.userInfo?["error"] as? String {
+            description = message
           }
           self.showAlert("Login Error", message: description)
           return self.step1()
