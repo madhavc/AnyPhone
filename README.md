@@ -19,7 +19,6 @@
 ##### Setting Up AnyPhone Web
 * Enable Hosting on your Parse App by going to the Settings > Hosting page. Add a subdomain name (ex. "anyphonetest123") that will allow you to access AnyPhone for Web.  
 * Delete 'index.html' from the generated Cloud Code folder to allow rendering of our 'index.ejs' instead
-* Edit 'dashboard.ejs' to include your Parse App Id and Parse Javascript Key
 * Visit the hosted pages using the subdomain you created. http://*.parseapp.com
 
 #### Optionally
