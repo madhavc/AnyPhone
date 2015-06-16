@@ -13,13 +13,13 @@
 * Create a new Parse App, and [set up a Cloud Code folder](https://parse.com/docs/js/guide#cloud-code) for the project.  
 * Copy the contents of the `cloud/` folder from this repository into the `cloud/` folder in your Cloud Code folder.  
 * Edit `main.js` to include your Twilio Account Sid, Auth Token, and phone number.  Generate some random string to use as the password token. 
-* Open the AnyPhone Xcode project, and put your Parse Application Id and Client Key in `AppDelegate.swift`.
+* Pull all required iOS dependencies from `Cocoapods` by running `pod install` under `AnyPhone` folder.
+* Open the `AnyPhone/AnyPhone.xcworkspace`, and put your Parse Application Id and Client Key in `AppDelegate.swift`.
 * Deploy your Cloud Code by running `parse deploy` from the root of your Cloud Code folder.
 
 ##### Setting Up AnyPhone Web
 * Enable Hosting on your Parse App by going to the Settings > Hosting page. Add a subdomain name (ex. "anyphonetest123") that will allow you to access AnyPhone for Web.  
 * Delete 'index.html' from the generated Cloud Code folder to allow rendering of our 'index.ejs' instead
-* Edit 'dashboard.ejs' to include your Parse App Id and Parse Javascript Key
 * Visit the hosted pages using the subdomain you created. http://*.parseapp.com
 
 #### Optionally
