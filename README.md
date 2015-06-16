@@ -22,6 +22,10 @@
 * Delete 'index.html' from the generated Cloud Code folder to allow rendering of our 'index.ejs' instead
 * Visit the hosted pages using the subdomain you created. http://*.parseapp.com
 
+
+##### Localization
+* Japanese mobile phone and language localization support added.
+
 #### Optionally
 
 * Lock down the User class in the Data Browser.  Remove all permissions except Update from the Public role.  This is a good idea even though we're already setting a restrictive ACL on each User we create through this process.  You can remove the "Add Field" permission only after using the app, or after manually creating the additional columns.

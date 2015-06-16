@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 
 var language = "en";
-var languages = ["en", "jp"];
+var languages = ["en", "ja"];
 
 var strings = require("cloud/strings.js");
 
@@ -43,16 +43,16 @@ app.post('/', function(req, res) {
 
   if(phoneNumber) {
     phoneNumber = phoneNumber.replace(/\D/g, '');
-    // check that length of number is 10 for US, 10 or 11 for Japan
+    // check that length of number is 10 for US, 11 for Japan
     if(language == "en" && phoneNumber.length != 10
-      || language == "jp" && (phoneNumber.length != 10 && phoneNumber.length != 11)) {
+      || language == "ja" && phoneNumber.length != 11) {
       res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningPhone'], 'language': language}));
     }
     Parse.Cloud.run("sendCode", {phoneNumber: phoneNumber, language: language}).then(function(response){
-      if(response){
-        res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningTwilio'], 'language': language}));
-      } else {
+      if(!response){
         res.render("verify.ejs", extend(strings[language], {phoneNumber: phoneNumber, 'language': language}));
+      } else {
+        res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningTwilio'], 'language': language}));
       }
     }, function(error){
       res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningGeneral'], 'language': language}));
@@ -143,6 +143,9 @@ app.post('/dashboard', function(req, res) {
     user.set("setting3", (setting3 !== undefined && setting3 == "on")?true:false);
     user.set("language", language);
     user.save().then(function(user) {
+
+      language = user.get("language");
+
       res.render("dashboard.ejs", extend(strings[language], {
         sessionToken: sessionToken,
         phoneNumber: user.get("username"), 

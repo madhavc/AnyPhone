@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3162F71B30128B0031D6F0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3162F91B30128B0031D6F0 /* Localizable.strings */; };
+		0B814CC11B30025800DA5100 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B1974F21B2FFDCC007F437C /* Main.storyboard */; };
+		0B814CC21B30025800DA5100 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B1974F61B2FFDD5007F437C /* LaunchScreen.xib */; };
 		140DD1E81AFB132300B0A6BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD1E71AFB132300B0A6BC /* AppDelegate.swift */; };
 		140DD1EA1AFB132300B0A6BC /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD1E91AFB132300B0A6BC /* InitialViewController.swift */; };
-		140DD1F21AFB132300B0A6BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140DD1F01AFB132300B0A6BC /* LaunchScreen.xib */; };
 		140DD20A1AFB138D00B0A6BC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140DD2071AFB138D00B0A6BC /* Bolts.framework */; };
 		140DD20B1AFB138D00B0A6BC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140DD2081AFB138D00B0A6BC /* Parse.framework */; };
 		140DD20C1AFB138D00B0A6BC /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140DD2091AFB138D00B0A6BC /* ParseUI.framework */; };
@@ -24,15 +26,18 @@
 		140DD2261AFB19F600B0A6BC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD2251AFB19F600B0A6BC /* LoginViewController.swift */; };
 		140DD2281AFB2A9C00B0A6BC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD2271AFB2A9C00B0A6BC /* MainViewController.swift */; };
 		14EF4EF21B03ED3900DB301A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14EF4EF11B03ED3900DB301A /* Images.xcassets */; };
-		14EF4EF41B03F2E500DB301A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14EF4EF31B03F2E500DB301A /* Main.storyboard */; };
 		2D0CD2A69C5ABC96D1DF971A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2A5D074E4B3ADAB2527B2D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B1974F11B2FFDCC007F437C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0B1974F51B2FFDD5007F437C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		0B3162F81B30128B0031D6F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0B3162FA1B30128C0031D6F0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0B814CC31B3002BD00DA5100 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/Main.storyboard; sourceTree = "<group>"; };
 		140DD1E61AFB132300B0A6BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		140DD1E71AFB132300B0A6BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		140DD1E91AFB132300B0A6BC /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		140DD1F11AFB132300B0A6BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		140DD2071AFB138D00B0A6BC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		140DD2081AFB138D00B0A6BC /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		140DD2091AFB138D00B0A6BC /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
@@ -50,7 +55,6 @@
 		140DD2271AFB2A9C00B0A6BC /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		14EF4EEE1AFCA39100DB301A /* AnyPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EF4EF11B03ED3900DB301A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		14EF4EF31B03F2E500DB301A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8D2A5D074E4B3ADAB2527B2D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0523284BCE479D35A0920FE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FE83987CF325CD623E2EAA0B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,10 +100,11 @@
 				140DD1E91AFB132300B0A6BC /* InitialViewController.swift */,
 				140DD2251AFB19F600B0A6BC /* LoginViewController.swift */,
 				140DD2271AFB2A9C00B0A6BC /* MainViewController.swift */,
-				14EF4EF31B03F2E500DB301A /* Main.storyboard */,
-				140DD1F01AFB132300B0A6BC /* LaunchScreen.xib */,
+				0B1974F21B2FFDCC007F437C /* Main.storyboard */,
+				0B1974F61B2FFDD5007F437C /* LaunchScreen.xib */,
 				14EF4EF11B03ED3900DB301A /* Images.xcassets */,
 				140DD1E51AFB132300B0A6BC /* Supporting Files */,
+				0B3162F91B30128B0031D6F0 /* Localizable.strings */,
 			);
 			path = AnyPhone;
 			sourceTree = "<group>";
@@ -190,7 +195,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				ja,
 			);
 			mainGroup = 140DD1D91AFB132300B0A6BC;
 			productRefGroup = 140DD1D91AFB132300B0A6BC;
@@ -207,9 +212,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B814CC11B30025800DA5100 /* Main.storyboard in Resources */,
+				0B3162F71B30128B0031D6F0 /* Localizable.strings in Resources */,
+				0B814CC21B30025800DA5100 /* LaunchScreen.xib in Resources */,
 				14EF4EF21B03ED3900DB301A /* Images.xcassets in Resources */,
-				140DD1F21AFB132300B0A6BC /* LaunchScreen.xib in Resources */,
-				14EF4EF41B03F2E500DB301A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,12 +284,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		140DD1F01AFB132300B0A6BC /* LaunchScreen.xib */ = {
+		0B1974F21B2FFDCC007F437C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				140DD1F11AFB132300B0A6BC /* Base */,
+				0B1974F11B2FFDCC007F437C /* en */,
+				0B814CC31B3002BD00DA5100 /* ja */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0B1974F61B2FFDD5007F437C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B1974F51B2FFDD5007F437C /* en */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		0B3162F91B30128B0031D6F0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B3162F81B30128B0031D6F0 /* en */,
+				0B3162FA1B30128C0031D6F0 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

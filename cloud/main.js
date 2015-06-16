@@ -1,12 +1,12 @@
 require("cloud/app.js");
 
-var twilioAccountSid = 'ACd7db1db7fab68bd1cef56398e01d0396';
-var twilioAuthToken = 'fa2598c340f8b0f49dd3d941baa6d067';
-var twilioPhoneNumber = '(855)997-2773';
+var twilioAccountSid = 'Your-Twilio-Account-Sid';
+var twilioAuthToken = 'Your-Twilio-Auth-Token';
+var twilioPhoneNumber = 'Your-Twilio-Phone-Number';
 var secretPasswordToken = 'Something-Random-Here';
 
 var language = "en";
-var languages = ["en", "jp"];
+var languages = ["en", "ja"];
 
 var twilio = require('twilio')(twilioAccountSid, twilioAuthToken);
 
@@ -28,9 +28,6 @@ Parse.Cloud.define("sendCode", function(req, res) {
 		var num = Math.floor(Math.random() * (max - min + 1)) + min;
 
 		if (result) {
-/// REMOVE BEFORE COMMIT
-			result.set("code", num);
-/// REMOVE BEFORE COMMIT
 			result.setPassword(secretPasswordToken + num);
 			result.set("language", language);
 			result.save().then(function() {
@@ -43,9 +40,6 @@ Parse.Cloud.define("sendCode", function(req, res) {
 		} else {
 			var user = new Parse.User();
 			user.setUsername(phoneNumber);
-/// REMOVE BEFORE COMMIT
-			user.set("code", num);
-/// REMOVE BEFORE COMMIT
 			user.setPassword(secretPasswordToken + num);
 			user.set("language", language);
 			user.setACL({}); 
@@ -80,10 +74,9 @@ Parse.Cloud.define("logIn", function(req, res) {
 
 function sendCodeSms(phoneNumber, code, language) {
 	var prefix = "+1";
-	if(typeof language !== undefined && language == "jp") {
+	if(typeof language !== undefined && language == "ja") {
 		prefix = "+81";
 	}
-	console.log(prefix);
 
 	var promise = new Parse.Promise();
 	twilio.sendSms({
