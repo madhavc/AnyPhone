@@ -36,9 +36,9 @@ class LoginViewController: UIViewController {
   
   func step1() {
     phoneNumber = ""
-    textField.placeholder = "555-333-6726"
-    questionLabel.text = "Please enter your phone number to log in:"
-    subtitleLabel.text = "This example is limited to 10-digit US numbers."
+    textField.placeholder = NSLocalizedString("numberDefault", comment: "555-333-6726")
+    questionLabel.text = NSLocalizedString("enterPhone", comment: "Please enter your phone number to log in.")
+    subtitleLabel.text = NSLocalizedString("enterPhoneExtra", comment: "This example is limited to 10-digit US number.")
     sendCodeButton.enabled = true
   }
   
@@ -46,8 +46,8 @@ class LoginViewController: UIViewController {
     phoneNumber = textField.text
     textField.text = ""
     textField.placeholder = "1234"
-    questionLabel.text = "Enter the 4-digit confirmation code:"
-    subtitleLabel.text = "It was sent in an SMS message to +1" + phoneNumber
+    questionLabel.text = NSLocalizedString("enterCode", comment: "Enter the 4-digit confirmation code:")
+    subtitleLabel.text = NSLocalizedString("enterCodeExtra", comment: "It was sent in an SMS message to +1" + phoneNumber) + phoneNumber
     sendCodeButton.enabled = true
   }
   
@@ -58,20 +58,27 @@ class LoginViewController: UIViewController {
   }
   
   @IBAction func didTapSendCodeButton() {
+
+    let preferredLanguages = NSBundle.mainBundle().preferredLocalizations
+    let preferredLanguage = preferredLanguages[0] as! String
+    
     if phoneNumber == "" {
-      if count(textField.text) != 10 {
-        showAlert("Phone Login", message: "You must enter a 10-digit US phone number including area code.")
-        return step1()
+
+      if (preferredLanguage == "en" && count(textField.text) != 10)
+          || (preferredLanguage == "ja" && count(textField.text) != 11) {
+          showAlert("Phone Login", message: NSLocalizedString("warningPhone", comment: "You must enter a 10-digit US phone number including area code."))
+          return step1()
       }
+
       self.editing = false
-      let params = ["phoneNumber" : textField.text]
+      let params = ["phoneNumber" : textField.text, "language" : preferredLanguage]
       PFCloud.callFunctionInBackground("sendCode", withParameters: params) {
         (response: AnyObject?, error: NSError?) -> Void in
         self.editing = true
         if let error = error {
           var description = error.description
           if count(description) == 0 {
-            description = "There was a problem with the service.\nTry again later."
+            description = NSLocalizedString("warningGeneral", comment: "Something went wrong.  Please try again.") // "There was a problem with the service.\nTry again later."
           } else if let message = error.userInfo?["error"] as? String {
             description = message
           }
@@ -87,7 +94,7 @@ class LoginViewController: UIViewController {
         }
       }
       
-      showAlert("Code Entry", message: "You must enter the 4 digit code texted to your phone number.")
+        showAlert("Code Entry", message: NSLocalizedString("warningCodeLength", comment: "You must enter the 4 digit code texted to your phone number."))
     }
   }
   
@@ -103,7 +110,7 @@ class LoginViewController: UIViewController {
       if let token = response as? String {
         PFUser.becomeInBackground(token) { (user: PFUser?, error: NSError?) -> Void in
           if let error = error {
-            self.showAlert("Login Error", message: "Something happened while trying to log in.\nPlease try again.")
+            self.showAlert("Login Error", message: NSLocalizedString("warningGeneral", comment: "Something happened while trying to log in.\nPlease try again."))
             self.editing = true
             return self.step1()
           }
@@ -111,7 +118,7 @@ class LoginViewController: UIViewController {
         }
       } else {
         self.editing = true
-        self.showAlert("Login Error", message: "Something went wrong.  Please try again.")
+        self.showAlert("Login Error", message: NSLocalizedString("warningGeneral", comment: "Something went wrong.  Please try again."))
         return self.step1()
       }
     }
@@ -126,7 +133,7 @@ class LoginViewController: UIViewController {
   }
   
   func showAlert(title: String, message: String) {
-    return UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "OK").show()
+    return UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: NSLocalizedString("alertOK", comment: "OK")).show()
   }
   
   override func preferredStatusBarStyle() -> UIStatusBarStyle {

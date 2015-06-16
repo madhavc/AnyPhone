@@ -5,21 +5,33 @@ var twilioAuthToken = 'Your-Twilio-Auth-Token';
 var twilioPhoneNumber = 'Your-Twilio-Phone-Number';
 var secretPasswordToken = 'Something-Random-Here';
 
+var language = "en";
+var languages = ["en", "ja"];
+
 var twilio = require('twilio')(twilioAccountSid, twilioAuthToken);
 
 Parse.Cloud.define("sendCode", function(req, res) {
-	if (!req.params.phoneNumber || req.params.phoneNumber.length != 10) return res.error('Invalid Parameters');
+	var phoneNumber = req.params.phoneNumber;
+	phoneNumber = phoneNumber.replace(/\D/g, '');
+
+	var lang = req.params.language;
+  if(lang !== undefined && languages.indexOf(lang) != -1) {
+		language = lang;
+	}
+
+	if (!phoneNumber || (phoneNumber.length != 10 && phoneNumber.length != 11)) return res.error('Invalid Parameters');
 	Parse.Cloud.useMasterKey();
 	var query = new Parse.Query(Parse.User);
-	query.equalTo('username', req.params.phoneNumber + "");
+	query.equalTo('username', phoneNumber + "");
 	query.first().then(function(result) {
 		var min = 1000; var max = 9999;
 		var num = Math.floor(Math.random() * (max - min + 1)) + min;
 
 		if (result) {
 			result.setPassword(secretPasswordToken + num);
+			result.set("language", language);
 			result.save().then(function() {
-				return sendCodeSms(req.params.phoneNumber, num);
+				return sendCodeSms(phoneNumber, num, language);
 			}).then(function() {
 				res.success();
 			}, function(err) {
@@ -27,11 +39,11 @@ Parse.Cloud.define("sendCode", function(req, res) {
 			});
 		} else {
 			var user = new Parse.User();
-			user.setUsername(req.params.phoneNumber);
+			user.setUsername(phoneNumber);
 			user.setPassword(secretPasswordToken + num);
+			user.set("language", language);
 			user.setACL({}); 
 			user.save().then(function(a) {
-				return sendCodeSms(req.params.phoneNumber, num);
 			}).then(function() {
 				res.success();
 			}, function(err) {
@@ -45,8 +57,12 @@ Parse.Cloud.define("sendCode", function(req, res) {
 
 Parse.Cloud.define("logIn", function(req, res) {
 	Parse.Cloud.useMasterKey();
-	if (req.params.phoneNumber && req.params.codeEntry) {
-		Parse.User.logIn(req.params.phoneNumber, secretPasswordToken + req.params.codeEntry).then(function (user) {
+
+	var phoneNumber = req.params.phoneNumber;
+	phoneNumber = phoneNumber.replace(/\D/g, '');
+
+	if (phoneNumber && req.params.codeEntry) {
+		Parse.User.logIn(phoneNumber, secretPasswordToken + req.params.codeEntry).then(function (user) {
 			res.success(user._sessionToken);
 		}, function (err) {
 			res.error(err);
@@ -56,11 +72,16 @@ Parse.Cloud.define("logIn", function(req, res) {
 	}
 });
 
-function sendCodeSms(phoneNumber, code) {
+function sendCodeSms(phoneNumber, code, language) {
+	var prefix = "+1";
+	if(typeof language !== undefined && language == "ja") {
+		prefix = "+81";
+	}
+
 	var promise = new Parse.Promise();
 	twilio.sendSms({
-		to: '+1' + phoneNumber,
-		from: twilioPhoneNumber,
+		to: prefix + phoneNumber.replace(/\D/g, ''),
+		from: twilioPhoneNumber.replace(/\D/g, ''),
 		body: 'Your login code for AnyPhone is ' + code
 	}, function(err, responseData) {
 		if (err) {

@@ -1,34 +1,64 @@
 var express = require("express");
 var app = express();
 
+var language = "en";
+var languages = ["en", "ja"];
+
+var strings = require("cloud/strings.js");
+
 app.set('views', 'cloud/views');
 app.set('view engine', 'ejs');
 app.use(express.bodyParser());
 
+function extend(target) {
+    var sources = [].slice.call(arguments, 1);
+    sources.forEach(function (source) {
+        for (var prop in source) {
+            target[prop] = source[prop];
+        }
+    });
+    return target;
+}
+
 app.get('/', function(req, res) {
-  res.render("index.ejs", {})
+  var lang = req.query.language;
+  if(lang !== undefined && languages.indexOf(lang) != -1) {
+    language = lang;
+  }
+
+  res.render("index.ejs", extend(strings[language], {'language': language}));
 });
 
+
 app.post('/', function(req, res) {
+
   var form = req.body;
+
   var phoneNumber = form.phoneNumber;
+
+  var lang = form.language;
+  if(lang !== undefined && languages.indexOf(lang) != -1) {
+    language = lang;
+  }
 
   if(phoneNumber) {
     phoneNumber = phoneNumber.replace(/\D/g, '');
-    if(phoneNumber.length != 10) {
-      res.render("index.ejs", {warning: "You must enter a 10-digit US phone number including area code."});
+    // check that length of number is 10 for US, 11 for Japan
+    if(language == "en" && phoneNumber.length != 10
+      || language == "ja" && phoneNumber.length != 11) {
+      res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningPhone'], 'language': language}));
     }
-    Parse.Cloud.run("sendCode", {phoneNumber: phoneNumber}).then(function(response){
-      if(response){
-        res.render("verify.ejs", {phoneNumber: phoneNumber});
+    Parse.Cloud.run("sendCode", {phoneNumber: phoneNumber, language: language}).then(function(response){
+      if(!response){
+        res.render("verify.ejs", extend(strings[language], {phoneNumber: phoneNumber, 'language': language}));
       } else {
-        res.render("index.ejs", {warning: "Something went wrong. Please check your Twilio configuration."});
+        res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningTwilio'], 'language': language}));
       }
     }, function(error){
-    res.render("index.ejs", {warning: "Something went wrong. Please try again."});
+      res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningGeneral'], 'language': language}));
     });
   } else { 
-    res.render("index.ejs", {warning: "You forgot to enter your mobile number."})
+    res.render("index.ejs", extend(strings[language], {warning: strings[language]['warningNoNumber'], 'language': language}))
   }
 });
 
@@ -41,10 +71,15 @@ app.post('/verify', function(req, res){
   var code = form.code;
   var phoneNumber = form.phoneNumber;
 
+  var lang = form.language;
+  if(lang !== undefined && languages.indexOf(lang) != -1) {
+    language = lang;
+  }
+
   if(code) {
     code = code.replace(/\D/g, '');
     if(code.length != 4) {
-      res.render("verify.ejs", {warning: "You must enter a 4 digit code texted to your phone number."});
+      res.render("verify.ejs", extend(strings[language], {warning: strings[language]['warningCodeLength'], 'language': language}));
     }
     Parse.Cloud.run("logIn", {codeEntry: code, phoneNumber: phoneNumber}).then(function(response){
       var sessionToken = response;
@@ -55,10 +90,10 @@ app.post('/verify', function(req, res){
       });
 
     }, function(error) {
-      res.render("verify.ejs", {phoneNumber: phoneNumber, warning: "Something went wrong. Please try again."});
+      res.render("verify.ejs", extend(strings[language], {phoneNumber: phoneNumber, warning: strings[language]['warningGeneral'], 'language': language}));
     });
   } else {
-    res.render("verify.ejs", {phoneNumber: phoneNumber, warning: "That verification code is not valid."});
+    res.render("verify.ejs", extend(strings[language], {phoneNumber: phoneNumber, warning:strings[language]['warningCodeInvalid'], 'language': language}));
   }
 });
 
@@ -67,16 +102,20 @@ app.get('/dashboard/:sessionToken', function(req, res) {
 
   Parse.User.become(sessionToken).then(function (user) {
     console.log("logged in as user");
-    res.render("dashboard.ejs", {
+
+    language = user.get("language");
+
+    res.render("dashboard.ejs", extend(strings[language], {
       sessionToken: sessionToken,
       phoneNumber: user.get("username"), 
       name: user.get("name"),
       setting1: user.get("setting1"),
       setting2: user.get("setting2"),
       setting3: user.get("setting3"),
-    });
+      language: user.get("language"),
+    }));
   }, function (error) {
-    console.log("couldn't log in as user");
+    console.log("Could not log in as user.");
     res.redirect("/");
   });
 });
@@ -92,20 +131,30 @@ app.post('/dashboard', function(req, res) {
   var setting2 = form.setting2;
   var setting3 = form.setting3;
 
+  var lang = form.language;
+  if(lang !== undefined && languages.indexOf(lang) != -1) {
+    language = lang;
+  }
+
   Parse.User.become(sessionToken).then(function (user) {
     user.set("name", name);
     user.set("setting1", (setting1 !== undefined && setting1 == "on")?true:false);
     user.set("setting2", (setting2 !== undefined && setting2 == "on")?true:false);
     user.set("setting3", (setting3 !== undefined && setting3 == "on")?true:false);
+    user.set("language", language);
     user.save().then(function(user) {
-      res.render("dashboard.ejs", {
+
+      language = user.get("language");
+
+      res.render("dashboard.ejs", extend(strings[language], {
         sessionToken: sessionToken,
         phoneNumber: user.get("username"), 
         name: user.get("name"),
         setting1: user.get("setting1"),
         setting2: user.get("setting2"),
         setting3: user.get("setting3"),
-      });
+        language: user.get("language"),
+      }));
     }, function(error) {
       console.log(error);
       res.redirect("/");
