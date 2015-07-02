@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText textField;
     private Button sendCodeButton;
 
-    private String phoneNumber = null;
+    public static String phoneNumber = null;
     private String token = null;
     private int code = 0;
     private int flag = 0; //If flag = 0 call the sendCode method, otherwise call the doLogin method.
