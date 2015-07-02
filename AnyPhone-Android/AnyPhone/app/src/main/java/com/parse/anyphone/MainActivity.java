@@ -11,7 +11,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void saveSettings() {
         if(nameField != null) {
-            user.put("name",nameField.getText().toString());
+            user.put("name", nameField.getText().toString());
 
             if (setting1.isChecked()) {
                 user.put("setting1", true);
@@ -64,7 +66,14 @@ public class MainActivity extends AppCompatActivity {
             if (setting3.isChecked()) {
                 user.put("setting3", true);
             }
-            user.saveInBackground();
+
+            user.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    Toast.makeText(getApplicationContext(), "Saved Successfully",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             Toast.makeText(getApplicationContext(), "Please enter a username.",
                     Toast.LENGTH_SHORT).show();
@@ -89,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
