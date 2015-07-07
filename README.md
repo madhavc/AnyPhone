@@ -25,6 +25,7 @@ The Android project demonstrates you how to use Twilio and Parse for phone numbe
 * Copy the contents of the `cloud/` folder from this repository into the `cloud/` folder in your Cloud Code folder.  
 * Edit `main.js` to include your Twilio Account Sid, Auth Token, and phone number.  Generate some random string to use as the password token. 
 * Add your Parse application id and client key in `Application.java`.
+* Deploy your Cloud Code by running parse deploy from the root of your Cloud Code folder.
 
 ##### Setting Up AnyPhone Web
 * Enable Hosting on your Parse App by going to the Settings > Hosting page. Add a subdomain name (ex. "anyphonetest123") that will allow you to access AnyPhone for Web.  
