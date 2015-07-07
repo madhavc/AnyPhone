@@ -17,7 +17,7 @@
 * Open the `AnyPhone/AnyPhone.xcworkspace`, and put your Parse Application Id and Client Key in `AppDelegate.swift`.
 * Deploy your Cloud Code by running `parse deploy` from the root of your Cloud Code folder.
 
-##### Android Setup
+#### Android Setup
 
 The Android project demonstrates you how to use Twilio and Parse for phone number account creation together. With this sample app, you can learn how to build phone-based login with Parse using a simple, step-by-step example. Here’s how it works:
 
