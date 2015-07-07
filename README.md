@@ -1,5 +1,5 @@
 ### AnyPhone
-##### An example iOS (Swift) app for phone-based user accounts with Twilio + Parse
+##### An example iOS (Swift) and Android app for phone-based user accounts with Twilio + Parse
 
 ---
 
@@ -8,7 +8,7 @@
 * Parse account (Sign up at [Parse.com](https://parse.com))
 * Twilio account & phone number (Sign up at [Twilio.com](https://twilio.com))
 
-#### Getting Started
+#### iOS Setup
 
 * Create a new Parse App, and [set up a Cloud Code folder](https://parse.com/docs/js/guide#cloud-code) for the project.  
 * Copy the contents of the `cloud/` folder from this repository into the `cloud/` folder in your Cloud Code folder.  
