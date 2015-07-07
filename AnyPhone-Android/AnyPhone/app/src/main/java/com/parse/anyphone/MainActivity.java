@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
         if(!ParseUser.getCurrentUser().isNew())
             checkSettings();
 
+
     }
     private  void checkSettings(){
+        nameField.setText(user.get("name").toString());
         setting1.setChecked(user.getBoolean("setting1"));
         setting2.setChecked(user.getBoolean("setting2"));
         setting2.setChecked(user.getBoolean("setting3"));
