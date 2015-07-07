@@ -1,126 +1,143 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity"
-    style="@style/MyMaterialTheme">
+    tools:context=".MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/linearLayout">
-
-        <TextView
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/container_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="YOUR NUMBER"
-            android:id="@+id/nameLabel"
-            android:textColor="@color/Grey"/>
-        <EditText
+            android:orientation="vertical">
 
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toobar" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/phoneNumberField"
-            android:hint="@string/number_default"
-            android:textColorHint="@color/LightGrey"
-            android:paddingLeft="25dp"
-            android:paddingRight="35dp"
-            android:background="@color/colorPrimaryLight"
-            android:textColor="@color/colorPrimaryDark"
-            android:drawableRight="@drawable/lock"/>
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/linearLayout">
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YOUR NAME"
-            android:id="@+id/questionLabel"
-            android:textColor="@color/Grey"/>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOUR NUMBER"
+                android:id="@+id/nameLabel"
+                android:textColor="@color/Grey"/>
+            <EditText
 
-        <EditText
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:id="@+id/nameField"
-            android:hint="Nick Fury"
-            android:textColorHint="@color/LightGrey"
-            android:paddingLeft="25dp"
-            android:background="@color/colorPrimaryLight"
-            android:textColor="@color/colorPrimaryDark" />
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/phoneNumberField"
+                android:hint="@string/number_default"
+                android:textColorHint="@color/LightGrey"
+                android:paddingLeft="25dp"
+                android:paddingRight="35dp"
+                android:background="@color/colorPrimaryLight"
+                android:textColor="@color/colorPrimaryDark"
+                android:drawableRight="@drawable/lock"/>
 
-        <TextView
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SETTINGS"
-            android:id="@+id/settingsLabel"
-            android:textColor="@color/Grey"/>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOUR NAME"
+                android:id="@+id/questionLabel"
+                android:textColor="@color/Grey"/>
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:id="@+id/nameField"
+                android:hint="Nick Fury"
+                android:textColorHint="@color/LightGrey"
+                android:paddingLeft="25dp"
+                android:background="@color/colorPrimaryLight"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SETTINGS"
+                android:id="@+id/settingsLabel"
+                android:textColor="@color/Grey"/>
 
 
-        <Switch
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:paddingLeft="25dp"
-            android:text="Orbital Tracking Grid"
-            android:background="@color/colorPrimaryLight"
-            android:id="@+id/setting1"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorPrimaryDark"/>
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingLeft="25dp"
+                android:text="Orbital Tracking Grid"
+                android:background="@color/colorPrimaryLight"
+                android:id="@+id/setting1"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"/>
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/dividerColor"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"/>
 
-        <Switch
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:paddingLeft="25dp"
-            android:text="Iron Legion"
-            android:background="@color/colorPrimaryLight"
-            android:id="@+id/setting2"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorPrimaryDark"/>
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingLeft="25dp"
+                android:text="Iron Legion"
+                android:background="@color/colorPrimaryLight"
+                android:id="@+id/setting2"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"/>
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/dividerColor"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"/>
 
-        <Switch
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:paddingLeft="25dp"
-            android:text="Theta Protocol"
-            android:background="@color/colorPrimaryLight"
-            android:id="@+id/setting3"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorPrimaryDark"/>
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingLeft="25dp"
+                android:text="Theta Protocol"
+                android:background="@color/colorPrimaryLight"
+                android:id="@+id/setting3"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"/>
 
-        <Button
-            android:layout_width="325dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:textAllCaps="false"
-            android:text="Save Settings"
-            android:id="@+id/saveSettingsButton"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/icons"
-            android:layout_gravity="center_horizontal" />
+            <Button
+                android:layout_width="325dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textAllCaps="false"
+                android:text="Save Settings"
+                android:id="@+id/saveSettingsButton"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/icons"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>
